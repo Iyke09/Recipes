@@ -15,6 +15,9 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "shc": "start coverage/lcov-report/index.html"
   },
+  "engines": {
+    "node": "6.10.0"
+  },
   "nyc": {
     "require": [
       "babel-register"
