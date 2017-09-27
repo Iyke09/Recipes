@@ -25,9 +25,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', routes);
 
-if(process.env.NODE_ENV === 'production'){
-  app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))
-}
+app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))
+
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/index.html'));
