@@ -10,7 +10,7 @@
     "s:test": "set NODE_ENV=test-l&& mocha --compilers js:babel-core/register --timeout 10000 server/test/test.js",
     "heroku-postbuild": "sequelize db:migrate",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
-    "start": "babel-node server/bin/www",
+    "start": "concurrently --kill-others \"nodemon --exec babel-node server/bin/www\" \" npm start --prefix ./client\"",
     "start:dev": "concurrently --kill-others \"nodemon --exec babel-node server/bin/www\" \" npm start --prefix ./client\"",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "shc": "start coverage/lcov-report/index.html"
