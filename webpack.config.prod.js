@@ -4,10 +4,10 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
-    './client/reduxstagram'
+    './client/app/reduxstagram'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'client/dist'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
@@ -30,12 +30,12 @@ module.exports = {
     {
       test: /\.js$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'client')
+      include: path.join(__dirname, 'client/app')
     },
     // CSS
     {
       test: /\.styl$/,
-      include: path.join(__dirname, 'client'),
+      include: path.join(__dirname, 'client/app'),
       loader: 'style-loader!css-loader!stylus-loader'
     }
     ]

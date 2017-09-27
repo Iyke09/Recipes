@@ -3,9 +3,18 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 const routes = require('./routes/index.js');
 import path from 'path'
+var webpack = require('webpack');
+var config = require('../webpack.config.dev');
 
-// Set up the express app
-const app = express();
+var app = express();
+var compiler = webpack(config);
+
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: config.output.publicPath
+}));
+
+app.use(require('webpack-hot-middleware')(compiler));
 
 // Log requests to the console.
 app.use(logger('dev'));
@@ -14,22 +23,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Setup a default catch-all route that sends back a welcome message in JSON format
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'public/test.html'));
-// });
-
-
 app.use('/api', routes);
 
 if(process.env.NODE_ENV === 'production'){
   app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))
 }
 
-
-// RENDER REACT FRONTEND
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client/index.html'));
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
+
+// app.listen(7770, 'localhost', function(err) {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log('Listening at http://localhost:7770');
+// });
 
 module.exports = app;

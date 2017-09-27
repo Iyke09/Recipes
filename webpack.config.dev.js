@@ -6,10 +6,10 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client',
-    './client/reduxstagram'
+    './client/app/reduxstagram'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'client/dist'),
     filename: 'bundle.js',
     publicPath: '/static/'
   },
