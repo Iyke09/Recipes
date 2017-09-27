@@ -26,10 +26,9 @@ if(process.env.NODE_ENV === 'production'){
   app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))
 }
 
-
 // RENDER REACT FRONTEND
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '..', 'client/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'client/index.html'));
+});
 
 module.exports = app;
