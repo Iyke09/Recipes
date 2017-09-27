@@ -23,8 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', routes);
 
 if(process.env.NODE_ENV === 'production'){
-  app.use( express.static(path.resolve(__dirname, '..', 'client/dist')))
+  app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))
 }
+
 
 // RENDER REACT FRONTEND
 app.get('*', (req, res) => {
