@@ -1,6 +1,6 @@
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
+import express from 'express';
+import logger from 'morgan';
+import bodyParser from 'body-parser';
 const routes = require('./routes/index.js');
 import path from 'path'
 
@@ -19,7 +19,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //   res.sendFile(path.join(__dirname, 'public/test.html'));
 // });
 
+
 app.use('/api', routes);
 
+app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')));
+
+// RENDER REACT FRONTEND
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'client/index.html'));
+});
 
 module.exports = app;
