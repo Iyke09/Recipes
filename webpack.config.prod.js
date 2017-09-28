@@ -11,6 +11,12 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
+  node: {
+    console: 'empty',
+    dns: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
@@ -27,9 +33,9 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.json$/,
-        loaders: [ 'json-loader'],
-        include: path.join(__dirname, 'client/app'),
+        test: /\.jsx*$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
     // js
     {
@@ -44,11 +50,5 @@ module.exports = {
       loader: 'style-loader!css-loader!stylus-loader'
     }
     ]
-  },
-  node: {
-    console: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
   }
 };
