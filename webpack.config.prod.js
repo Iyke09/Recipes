@@ -29,7 +29,7 @@ module.exports = {
     // js
     {
       test: /\.js$/,
-      loaders: ['babel','json-loader'],
+      loaders: ['babel'],
       include: path.join(__dirname, 'client/app'),
     },
     // CSS
