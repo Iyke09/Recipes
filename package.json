@@ -62,6 +62,7 @@
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.14.0",
+    "json-loader": "^0.5.7",
     "jsonwebtoken": "^7.4.1",
     "morgan": "^1.7.0",
     "net": "^1.0.2",

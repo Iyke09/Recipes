@@ -13,11 +13,6 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
-  node: {
-    net: 'empty',
-    tls: 'empty',
-    dns: 'empty'
-  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
@@ -27,8 +22,8 @@ module.exports = {
     // js
     {
       test: /\.js$/,
-      loaders: ['babel'],
-      include: path.join(__dirname, 'client')
+      loaders: ['babel','json-loader'],
+      include: path.join(__dirname, 'client'),
     },
     // CSS
     {
@@ -37,5 +32,11 @@ module.exports = {
       loader: 'style-loader!css-loader!stylus-loader'
     }
     ]
+  },
+  node: {
+    console: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 };
