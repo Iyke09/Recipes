@@ -13,7 +13,7 @@ import Single from './component/Single';
 import Signup from './component/Signup';
 import Signin from './component/Signin';
 import Add from './component/addRecipe';
-import Edit from './component/edit';
+import Edit from './component/Edit';
 import PhotoGrid from './component/PhotoGrid';
 
 // import react router deps
