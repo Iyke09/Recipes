@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-// import jwt from 'jsonwebtoken';
+import jwt from 'jwt-decode';
 
 const Photo = React.createClass({
     eventHandler(e, val) {
@@ -11,7 +11,7 @@ const Photo = React.createClass({
   render() {
     const { post, i, comments } = this.props;
     const user = localStorage.getItem('token')
-    // const decoded = jwt.decode(user);
+    const decoded = jwt(user);
     const check = this.props.error.pop();
     const time = post.updatedAt.slice(0, post.updatedAt.indexOf('T'))
     const recipeId = this.props.recipe.map((recipe) => recipe.id)

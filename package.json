@@ -65,6 +65,7 @@
     "express": "^4.14.0",
     "json-loader": "^0.5.7",
     "jsonwebtoken": "^7.4.1",
+    "jwt-decode": "^2.2.0",
     "morgan": "^1.7.0",
     "net": "^1.0.2",
     "nodemailer": "^4.1.0",
