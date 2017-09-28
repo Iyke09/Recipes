@@ -26,15 +26,15 @@ module.exports = {
   ],
   module: {
     loaders: [
+      {
+        test: /\.json$/,
+        loaders: [ 'json-loader'],
+        include: path.join(__dirname, 'client/app'),
+      },
     // js
     {
       test: /\.js$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'client/app'),
-    },
-    {
-      test: /\.json$/,
-      loaders: ['json-loader'],
       include: path.join(__dirname, 'client/app'),
     },
     // CSS
