@@ -13,6 +13,11 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/static/'
   },
+  node: {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
