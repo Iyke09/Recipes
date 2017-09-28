@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 const Photo = React.createClass({
     eventHandler(e, val) {
@@ -11,7 +11,7 @@ const Photo = React.createClass({
   render() {
     const { post, i, comments } = this.props;
     const user = localStorage.getItem('token')
-    const decoded = jwt.decode(user);
+    // const decoded = jwt.decode(user);
     const check = this.props.error.pop();
     const time = post.updatedAt.slice(0, post.updatedAt.indexOf('T'))
     const recipeId = this.props.recipe.map((recipe) => recipe.id)
@@ -42,13 +42,13 @@ const Photo = React.createClass({
         }
     }
     const recipe = check === true && check.id === post.id && post.favUser.indexOf(decoded.user.email) !== -1
-    return ( 
+    return (
         <div className="col-sm-12 col-md-6 col-xs-12 col-lg-4" id={post.id}>
             <div className="card hoverable">
                 <div className="card-image">
                     <img src={post.image} alt={post.title} className="img" style={{height: 250}} />
                     <span className=" rightalign">
-                        <a className="btn-floating waves-effect waves-light " 
+                        <a className="btn-floating waves-effect waves-light "
                             style={ fav(post.id) ? {backgroundColor: 'red'} : {backgroundColor: 'teal'} } id={post.id}>
                             <i className="fa fa-heart"
                             onClick={ this.props.favRecipe.bind(null, post.id) }>
@@ -62,14 +62,14 @@ const Photo = React.createClass({
 
                     <span className=" rightalign3">
                     <a className="btn-floating waves-effect waves-light red">
-                    <i className="material-icons" 
+                    <i className="material-icons"
                     onClick={ this.props.editRecipe.bind(null, post.id)}>edit</i>
                     </a>
                     </span>
-                    
+
                     <span className=" rightalign4">
                     <a className="btn-floating waves-effect waves-light red" disabled={auth(post.userId)}>
-                    <i className="material-icons" 
+                    <i className="material-icons"
                      onClick={this.eventHandler.bind(null, post.id)}>delete</i></a>
                     </span>
                     <Link to={`/view/${post.id}`}>
@@ -87,11 +87,11 @@ const Photo = React.createClass({
                     <p>{post.description}</p>
                 </div>
                 <div className="black white-text center paradiv">
-                    <p className="white-text para"><span ><i className="fa fa-clock-o"></i> {time}</span> 
-                    
-                    <span className="span"><a><i className="fa fa-comments-o" style={{marginRight : 2}}></i>12</a></span> 
-                    
-                    
+                    <p className="white-text para"><span ><i className="fa fa-clock-o"></i> {time}</span>
+
+                    <span className="span"><a><i className="fa fa-comments-o" style={{marginRight : 2}}></i>12</a></span>
+
+
                     <span className="span"><a onClick={ this.props.upvote.bind(null, post.id) }>
                         <i className="fa fa-thumbs-up" style={{marginRight : 2}}> </i>{post.upvote}</a></span>
 

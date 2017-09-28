@@ -12,9 +12,8 @@ module.exports = {
     publicPath: '/static/'
   },
   node: {
-    console: 'empty',
-    dns: 'empty',
     net: 'empty',
+    dns: 'empty',
     tls: 'empty'
   },
   plugins: [
@@ -32,11 +31,12 @@ module.exports = {
   ],
   module: {
     loaders: [
-      {
-        test: /\.jsx*$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
+    // js
+    {
+      test: /\.js$/,
+      loaders: ['babel'],
+      include: path.join(__dirname, 'client/app'),
+    },
     // CSS
     {
       test: /\.styl$/,
