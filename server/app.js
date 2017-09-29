@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(express.static('./public'))
+
 app.use('/api', routes);
 
 app.use('/static', express.static(path.resolve(__dirname, '..', 'client/dist')))

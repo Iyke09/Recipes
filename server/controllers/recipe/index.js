@@ -10,8 +10,12 @@ import singleRecipe from './singleRecipe';
 import allFav from './allFavorites';
 import upvote from './upvote';
 import downvote from './downvote';
+import addPhoto from './addPhoto';
+import photoCart from './allPhoto';
 
 const recipesController = {
+  addPhoto,
+  photoCart,
   createRecipe,
   updateRecipe,
   deleteRecipe,
