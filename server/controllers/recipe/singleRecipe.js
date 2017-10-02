@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { Recipe } from '../../models';
+import { Gallery } from '../../models';
 
 const singleRecipe = (req, res) => { // -----------------------------create recipe!
   const decoded = jwt.decode(req.query.token || req.body.token || req.headers.token);
@@ -8,8 +8,8 @@ const singleRecipe = (req, res) => { // -----------------------------create reci
       message: 'you have to be logged in to create recipe',
     });
   }
-  Recipe.findOne({ where: { id: req.params.id } })
-  .then((recipe) => {
+  Gallery.findOne({ where: { id: req.params.id } })
+  .then( (recipe) => {
     if (!recipe) {
       return res.status(404).send({
         message: 'recipe Not Found',

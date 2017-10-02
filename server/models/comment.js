@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     occupation: DataTypes.STRING,
     reply: DataTypes.ARRAY(DataTypes.STRING),

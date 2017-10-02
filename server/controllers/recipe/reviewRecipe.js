@@ -1,4 +1,4 @@
-import { Recipe, Comment, User } from '../../models';
+import { Gallery, Comment, User } from '../../models';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 
@@ -14,51 +14,45 @@ const reviewRecipe = (req, res) => { // ---------------------add review and aler
       message: 'please fill in the required fields',
     });
   }
-  Recipe.findById(req.params.id)
+  Gallery.findById(req.params.id)
     .then((recipe) => {
       if (!recipe) {
         return res.status(404).send({
-          message: 'recipe not found',
+          message: ' not found',
         });
       }
-      User.findById(recipe.userId)
-        .then((user) => {
-          Comment.create({
-            recipeId: req.params.id,
-            content: req.body.content,
-            email: req.body.email,
-            occupation: req.body.occupation,
-          })
-            .then(() => {
-              const transporter = nodemailer.createTransport({
-                service: 'Gmail',
-                auth: {
-                  user: 'iykay33@gmail.com',
-                  pass: 'p3nn1s01',
-                },
-              });
-              const mailOptions = {
-                from: 'iykay33@gmail.com',
-                to: user.email,
-                subject: 'Recipe Review',
-                text: 'Hello there,youre recipe just got a review! ',
-              };
-              transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log(`Message sent: ${info.response}`);
-                }
-              });
-              return res.status(200).send({ message: 'review sent!' });
-            })
-            .catch(error => res.status(400).send(error.toString()));
+        Comment.create({
+          recipeId: 11,
+          content: req.body.content,
+          email: decoded.user.username,
+          occupation: req.params.id,
         })
-        .catch(error => res.status(400).send(error.toString()));
+          .then((review) => {
+            Comment.findAndCountAll({
+              where: {
+                occupation: req.params.id,
+              },
+            })
+              .then((count) => {
+                Gallery.findById(req.params.id)
+                  .then((recipe) => {
+                    recipe.update({
+                      comments: count.count,
+                    })
+                      .then(() => res.status(201).send({
+                        photo: recipe,
+                        message: 'review sent',
+                      }))
+                      .catch(error => res.status(401).send(error));
+                  })
+                  .catch(error => res.status(401).send(error));
+              })
+              .catch(error => res.status(401).send(error));
+          })
+          .catch(error => res.status(400).send(error.toString()));
+
     })
-    .catch(error => res.status(500).send({
-      message: error.errors[0].message
-    }));
+    .catch(error => res.status(500).send(error.toString()));
 };
 
 export default reviewRecipe;

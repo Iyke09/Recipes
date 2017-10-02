@@ -1,4 +1,4 @@
-import { Recipe, Favorite } from '../../models';
+import { Gallery, Favorite } from '../../models';
 import jwt from 'jsonwebtoken';
 
 const userFavorite = (req, res) => { // -------------------------add recipe to fav and update recipe!
@@ -8,11 +8,11 @@ const userFavorite = (req, res) => { // -------------------------add recipe to f
       message: 'you have to be logged in to create recipe',
     });
   }
-  Recipe.findOne({ where: { id: req.params.id } })
+  Gallery.findOne({ where: { id: req.params.id } })
     .then((recipe) => {
       if (!recipe) {
         res.status(404).send({
-          message: 'recipe not found!',
+          message: ' not found!',
         });
       } else {
         Favorite.findOne({
@@ -28,34 +28,51 @@ const userFavorite = (req, res) => { // -------------------------add recipe to f
                 userId: decoded.user.id,
               })
                 .then(() => {
-                  Recipe.findOne({ where: { id: req.params.id } })
-                    .then((recipe) => {
-                      recipe.update({
-                        favUser: recipe.favUser.concat(decoded.user.email),
-                      })
-                        .then(() => res.status(201).send({
-                          message: true,
-                          id: req.params.id
-                        }))
-                        .catch(error => res.status(500).send(error.toString()));
+                  Favorite.findAndCountAll({
+                    where: {
+                      recipeId: req.params.id,
+                    },
+                  })
+                    .then((count) => {
+                      Gallery.findById(req.params.id)
+                        .then((recipe) => {
+                          recipe.update({
+                            likes: count.count,
+                          })
+                            .then(() => res.status(201).send({
+                              photo: recipe,
+                              message: 'recipe favorited',
+                            }))
+                            .catch(error => res.status(401).send(error));
+                        })
+                        .catch(error => res.status(401).send(error));
                     })
-                    .catch(error => res.status(500).send(error.toString()));
+                    .catch(error => res.status(401).send(error));
                 })
                 .catch(error => res.status(500).send(error.toString()));
             } else {
               success.destroy()
                 .then(() => {
-                  Recipe.findOne({ where: { id: req.params.id } })
-                    .then((recipe) => {
-                      recipe.update({
-                        favUser: recipe.favUser.splice(recipe.favUser.indexOf(decoded.user.email), 1),
-                      })
-                        .then(() => res.status(200).json({
-                          message: false,
-                        }))
-                        .catch(error => res.status(500).send(error.toString()));
+                  Favorite.findAndCountAll({
+                    where: {
+                      recipeId: req.params.id,
+                    },
+                  })
+                    .then((count) => {
+                      Gallery.findById(req.params.id)
+                        .then((recipe) => {
+                          recipe.update({
+                            likes: count.count,
+                          })
+                            .then(() => res.status(201).send({
+                              photo: recipe,
+                              message: 'recipe unfavorited',
+                            }))
+                            .catch(error => res.status(401).send(error));
+                        })
+                        .catch(error => res.status(401).send(error));
                     })
-                    .catch(error => res.status(500).send(error.toString()));
+                    .catch(error => res.status(401).send(error));
                 })
                 .catch(error => res.status(500).send(error.toString()));
             }

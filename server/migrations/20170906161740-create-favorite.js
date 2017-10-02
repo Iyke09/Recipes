@@ -10,13 +10,6 @@ module.exports = {
     },
     recipeId: {
       type: Sequelize.INTEGER,
-      onDelete: 'CASCADE',
-      allowNull: false,
-      references: {
-        model: 'Recipes',
-        key: 'id',
-        as: 'recipe',
-      },
     },
     // cartId: {
     //   type: Sequelize.INTEGER,

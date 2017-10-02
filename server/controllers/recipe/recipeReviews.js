@@ -8,7 +8,7 @@ const recipeReviews = (req, res) => { // -----------------------------create Com
       message: 'you have to be logged in to create Comment',
     });
   }
-  Comment.findAll({ where: { recipeId: req.params.id } })
+  Comment.findAll({ where: { occupation: req.params.id } })
   .then((recipe) => {
     if (!recipe) {
       return res.status(404).send({
