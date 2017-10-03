@@ -11,6 +11,7 @@ export function deleteRecipe(index) {
       index
     }
   }
+
   export function favRecipe(index) {
     return {
       type: 'FAV_RECIPE',
@@ -20,7 +21,20 @@ export function deleteRecipe(index) {
   export function getSingle(index) {
     return {
       type: 'GET_SINGLE',
+      index,
+
+    }
+  }
+  export function getPhoto(index) {
+    return {
+      type: 'GET_PHOTO',
       index
+    }
+  }
+
+  export function getProfile() {
+    return {
+      type: 'GET_PROFILE'
     }
   }
 
@@ -58,25 +72,24 @@ export function editRecipe(index) {
       index
     }
   }
-  
+
   // add comment
 export function addComment(postId, author, comment) {
     return {
-        type: 'ADD_COMMENT',
+        type: 'ADD_COMMENTS',
         postId,
         author,
         comment
     }
 }
 
-export function editRecipex(index, title, image, category, description)  {
+export function editRecipex(index, caption, image, category)  {
     return {
         type: 'EDIT_RECIPES',
         index,
-        title,
+        caption,
         image,
-        category,
-        description
+        category
     }
 }
 
@@ -112,7 +125,7 @@ export function getRecipes() {
     }
 }
   // remove comment
-  
+
 export function removeComment(postId, i) {
     return {
       type: 'REMOVE_COMMENT',
@@ -120,4 +133,3 @@ export function removeComment(postId, i) {
       postId
     }
 }
-  

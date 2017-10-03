@@ -21,31 +21,31 @@ const signup = React.createClass({
                 <p className="h5 text-center mb-4">Sign up</p>
                     <h6 className="text-center" style={{color: 'red'}}>{ errorMessage }</h6>
                     <div className="md-form">
-                        <i className="fa fa-user prefix grey-text"></i>
-                        <input type="text" id="orangeForm-name" className="form-control" 
+                        <i className="fa fa-user prefix grey-text" style={{marginRight:4}}></i>
+                        <input type="text" id="orangeForm-name" className="form-control"
                         ref="name" placeholder="Your username"/>
                     </div>
                     <div className="md-form">
-                        <i className="fa fa-envelope prefix grey-text"></i>
-                        <input type="text" id="orangeForm-email" className="form-control" 
+                        <i className="fa fa-envelope prefix grey-text" style={{marginRight:4}}></i>
+                        <input type="text" id="orangeForm-email" className="form-control"
                         ref="email" placeholder="Your email"/>
                     </div>
-                
+
                     <div className="md-form">
-                        <i className="fa fa-lock prefix grey-text"></i>
-                        <input type="password" id="orangeForm-pass" className="form-control" ref="password" 
+                        <i className="fa fa-lock prefix grey-text" style={{marginRight:4}}></i>
+                        <input type="password" id="orangeForm-pass" className="form-control" ref="password"
                         placeholder="Your password"/>
                     </div>
-                
+
                     <div className="text-center">
-                        <button className="btn btn-deep-orange btn-rounded btn-block">Sign up</button>
+                        <button className="btn btn-deep-orange btn-rounded">Sign up</button>
                     </div>
                     </form>
                 </div>
             </div>
          </div>
       </div>
-        
+
     )
   }
 });

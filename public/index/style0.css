@@ -1,0 +1,231 @@
+body,h1,h2,h3,h4,h5,h6,p {font-family: 'Asap Condensed', sans-serif}
+.content { background-color: rgba(0.4,0.4,0.4,0.2)}
+body, html {height: 100%}
+.bgimg img{
+    height: 650px;
+    width: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.bg-overlay{
+  position: absolute;
+  width:100%;
+  top:0px;
+  color:white;
+  background-color: rgba(0,0,0,0.4);
+  min-height: 100%
+}
+.line{
+  line-height: 24px;
+}
+#i-desc{
+  background-color: #FBFCFC;
+}
+.input-h{
+  height: 33px;
+}
+.display{
+  position: relative;
+}
+.rw-image{
+  width:100%;
+  height: 250px;
+}
+.ad{
+  color: white;
+}
+.fa-color{
+  color: #212F3C
+}
+.dlt-ul{
+  padding-bottom: 55px;
+  height: 550px;
+  overflow: scroll;
+  padding-right: 10px;
+  font-family: 'Asap Condensed', sans-serif;
+}
+.div-frm{
+  padding: 10px 18px;
+}
+.dlt-img{
+  width: 100%;
+  height: 600px
+}
+.dlt-para{
+  font-size: 14px;
+  font-family: 'Quattrocento', serif;
+}
+.dlt-para2{
+  font-family:'Asap Condensed', sans-serif;
+}
+.dlt-sect{
+  background-color: rgba(0,0,0,0.8);
+  padding: 3px 4px;
+}
+.sect{
+  width: 97%;
+}
+.imgMode{
+  width: 100%;
+}
+.mySlides{
+  width:100%;
+}
+.img-show{
+  width: 100%;
+}
+.rightalign2 {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.rightalign3 {
+  position: absolute;
+  right: 10px;
+  top: 52px;
+}
+
+.rightalign4 {
+  position: absolute;
+  right: 45px;
+  top: 0px;
+}
+.rightalign5 {
+  position: absolute;
+  right: 25px;
+  top: 52px;
+}
+.fa-icon{
+  margin-top: 8px;
+}
+.grid-desc{
+  background-color: rgba(0,0,0,0.8);
+  padding: 3px 4px;
+}
+.grid-img{
+  width: 100%;
+  border: 2px solid white;
+}
+.grid-sect{
+  width: 99%;
+  bottom: 30px;
+}
+.grid-para{
+  font-size: 12px;
+  font-family: 'Quattrocento', serif;
+}
+.grid-span{
+  font-family:'Asap Condensed', sans-serif
+}
+.rw-overlay{
+  position: absolute;
+  width:100%;
+  top:0px;
+  color:white;
+  background-color: rgba(0,0,0,0.7);
+  height: 250px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.caption{
+  border: 1px solid white;
+  padding: 102px;
+}
+.bk-cap {
+  padding: 10px;
+}
+.bg-para{
+  font-size: 105px ;
+}
+.sm-para{
+  font-size: 22px ;
+}
+.fa-lg{
+  cursor: pointer;
+}
+.butt{
+  border:1px solid white;
+  background-color: transparent;
+  padding: 15px 45px;
+  color: white;
+}
+.butts{
+  border: 0px solid white;
+  background-color: transparent;
+  padding: 15px 45px;
+}
+.butt2{
+  border: 1px solid red;
+  color: red;
+  background-color: transparent;
+  padding: 10px 35px;
+}
+.butt3{
+  border: 1px solid red;
+  color: red;
+  background-color: transparent;
+  padding: 2px 10px;
+}
+.barz{
+  width: 100%;
+}
+select{
+  display: block;
+}
+.bgimg-fixed img{
+    min-height: 70%;
+    background-attachment: fixed;
+    background-size: cover;
+    /*background-position: center;*/
+
+}
+/* PROFILE STYLES */
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+
+/*.img {margin-bottom: -7px}*/
+
+.rightalign7{
+    position: absolute;
+    right: 10px;
+    top: 18px;
+  }
+.rightalign8{
+    position: absolute;
+    right: 10px;
+    top: 61px;
+  }
+  .button{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  }
+  .off:hover{
+    filter: grayscale(0%);
+  }
+  nav a{
+    text-decoration: none;
+  }
+  .hr{
+    width: 200px
+  }
+  .pipe{
+    height:28px;
+    width:85%
+  }
+  .ref{
+    width: 80px;
+  }
+  .img-gridd{
+    width:100%;
+    border: 2px solid white;
+    height: 440px
+  }
+  .fa-w{
+     color: #212F3C;
+  }

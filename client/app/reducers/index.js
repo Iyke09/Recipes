@@ -10,9 +10,11 @@ import edit from './edit';
 import fav from './fav';
 import single from './single';
 import comment from './comment';
+import gallery from './gallery';
+import profile from './profile';
 
 
-const rootReducer = combineReducers({ posts, comments, recipe, user, error, 
-    edit, fav, comment, single, routing: routerReducer });
+const rootReducer = combineReducers({ posts, comments, recipe, user, error,
+    edit, fav, comment, gallery, profile, single, routing: routerReducer });
 
 export default rootReducer;

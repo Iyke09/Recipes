@@ -74,7 +74,8 @@ const Photo = React.createClass({
                     </span>
                     <Link to={`/view/${post.id}`}>
                         <span>
-                            <a className="btn-floating halfway-fab waves-effect waves-light black">
+                            <a className="btn-floating halfway-fab waves-effect waves-light black"
+                            onClick={ this.props.getSingle.bind(null, post.id)}>
                                 <i className="fa fa-chevron-right"></i>
                             </a>
                         </span>

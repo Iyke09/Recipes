@@ -8,12 +8,18 @@ import { browserHistory } from 'react-router';
 
 // Our worker Saga: will perform the async increment task
 const rootUrl = 'https://jsonplaceholder.typicode.com';
-const userUrl = 'http://localhost:8000/api/users'
-const recipeUrl = 'http://localhost:8000/api/recipes'
+// const userUrl = 'http://localhost:8000/api/users'
+// const recipeUrl = 'http://localhost:8000/api/recipes'
+// const galleryUrl = 'http://localhost:8000/api/gallery'
+
+const userUrl = 'http://reciped.herokuapp.com/api/users'
+const recipeUrl = 'http://reciped.herokuapp.com/api/recipes'
+const galleryUrl = 'http://reciped.herokuapp.com/api/gallery'
+
 export function* incrementAsync(action) {
   try{
       console.log('trying to connect...')
-    //   const response = yield call(axios.get, `${rootUrl}/posts`)   
+    //   const response = yield call(axios.get, `${rootUrl}/posts`)
     // //    yield put({ type: 'INCREMENT', response: response.data })
       browserHistory.push('/')
       console.log('Done!')
@@ -37,7 +43,7 @@ export function* addUserAsync(action) {
             username: action.name,
             email: action.email,
             password: action.password
-        })   
+        })
         // yield put({ type: 'INCREMENT', response: response.data })
         browserHistory.push('/auth/signin')
         console.log(response)
@@ -46,7 +52,7 @@ export function* addUserAsync(action) {
         yield put({ type: 'ERROR', error })
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchAddUser() {
       console.log('running adduser!')
@@ -64,14 +70,14 @@ export function* checkUserAsync(action) {
             email: action.email,
             password: action.password
         })
-        yield put({ type: 'INCOMING_TOKEN', response: response.data }) 
+        yield put({ type: 'INCOMING_TOKEN', response: response.data })
         browserHistory.push('/')
     }catch(e){
         const error = e.response.data.message;
         yield put({ type: 'ERROR', error })
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchcheckUser() {
       console.log('running checkuser!')
@@ -88,13 +94,13 @@ export function* getRecipesAsync(action) {
         let token = localStorage.getItem('token')
         const response = yield call(axios.get, `${recipeUrl}?token=${token}`)
         const response2 = yield call(axios.get, `${recipeUrl}/fav?token=${token}`)
-        yield put({ type: 'FAV_SUCCESS', response: response2.data }) 
-        yield put({ type: 'INCOMING_RECIPES', response: response.data }) 
+        yield put({ type: 'FAV_SUCCESS', response: response2.data })
+        yield put({ type: 'INCOMING_RECIPES', response: response.data })
     }catch(e){
         console.log( e.response )
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchGetRecipe() {
       console.log('getRecipes running')
@@ -106,7 +112,7 @@ export function* getRecipesAsync(action) {
 //-----------------checkuser saga!!!------
 export function* addRecipesAsync(action) {
     try{
-        console.log('trying to connect to user db...') 
+        console.log('trying to connect to user db...')
         console.log('heyyyyy ' + action)
         let token = localStorage.getItem('token')
         const response = yield call(axios.post, `${recipeUrl}?token=${token}`, {
@@ -115,13 +121,13 @@ export function* addRecipesAsync(action) {
             category: action.category,
             description: action.description
         })
-        yield put({ type: 'RECIPE_SUCCESS', response: response.data }) 
+        yield put({ type: 'RECIPE_SUCCESS', response: response.data })
     }catch(e){
         const error = e.response.data.message;
         yield put({ type: 'ERROR', error })
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchAddRecipe() {
       console.log('addRecipes running')
@@ -131,19 +137,19 @@ export function* addRecipesAsync(action) {
 
 export function* getSingleRecipesAsync(action) {
     try{
-        console.log('trying to connect to EDIT RECIPE 1...') 
+        console.log('trying to connect to EDIT RECIPE 1...')
         console.log('heyyyyy ' + action)
         let token = localStorage.getItem('token')
         const response = yield call(axios.get, `${recipeUrl}/${action.index}?token=${token}`)
         yield put({ type: 'SINGLE_RECIPE', response: response.data })
         setTimeout(function() {
-            browserHistory.push('/recipes/edit') 
+            browserHistory.push('/recipes/edit')
         }, 1000);
     }catch(e){
         console.log( e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchSingleRecipe() {
       console.log('addRecipes running')
@@ -154,22 +160,21 @@ export function* getSingleRecipesAsync(action) {
 
 export function* editSingleRecipesAsync(action) {
     try{
-        console.log('trying to connect to update recipe db...') 
+        console.log('trying to connect to update USER PHOTO db...')
         console.log('helllllllo ' + action)
         let token = localStorage.getItem('token')
         const response = yield call(axios.put, `${recipeUrl}/${action.index}?token=${token}`,{
-            title: action.title ,
             image: action.image ,
-            category: action.category ,
-            description: action.description 
+            caption: action.caption ,
+            category: action.category
         })
-        yield put({ type: 'RECIPE_SUCCESS', response: response.data }) 
+        yield put({ type: 'RECIPE_SUCCESS', response: response.data })
     }catch(e){
         const error = e.response.data.message;
         yield put({ type: 'ERROR', error })
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchEditSingleRecipe() {
       console.log('EDITRecipes running')
@@ -184,12 +189,11 @@ export function* dltRecipesAsync(action) {
         let token = localStorage.getItem('token')
         const response = yield call(axios.delete, `${recipeUrl}/${action.index}?token=${token}`)
         console.log(response.data)
-        browserHistory.push('/')
     }catch(e){
        console.log(e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchdltRecipe() {
       console.log('delete watcher running')
@@ -202,13 +206,13 @@ export function* favRecipesAsync(action) {
         let token = localStorage.getItem('token')
         const response = yield call(axios.post, `${recipeUrl}/${action.index}/fav?token=${token}`)
         const response2 = yield call(axios.get, `${recipeUrl}/fav?token=${token}`)
-        yield put({ type: 'RECIPE_SUCCESS', response: response.data }) 
-        yield put({ type: 'FAV_SUCCESS', response: response2.data }) 
+        yield put({ type: 'RECIPE_SUCCESS', response: response.data })
+        yield put({ type: 'FAV_SUCCESS', response: response2.data })
     }catch(e){
        console.log(e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchFavRecipe() {
       console.log('fav watcher running')
@@ -218,16 +222,16 @@ export function* favRecipesAsync(action) {
 
 
 export function* upvoteRecipesAsync(action) {
-    try{
-        let token = localStorage.getItem('token')
-        const response = yield call(axios.post, `${recipeUrl}/${action.index}/upvote?token=${token}`)
-        browserHistory.push('/')
-        console.log(response.data.message)
-    }catch(e){
-       console.log(e.response)
-    }
+  try{
+      let token = localStorage.getItem('token')
+      const response = yield call(axios.post, `${recipeUrl}/${action.index}/upvote?token=${token}`)
+      browserHistory.push('/')
+      console.log(response.data.message)
+  }catch(e){
+      console.log(e.response)
   }
-  
+}
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchUpvoteRecipe() {
       yield takeEvery('UPVOTE_RECIPE', upvoteRecipesAsync)
@@ -243,7 +247,7 @@ export function* upvoteRecipesAsync(action) {
        console.log(e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchDownvoteRecipe() {
       yield takeEvery('DOWNVOTE_RECIPE', downvoteRecipesAsync)
@@ -251,16 +255,16 @@ export function* upvoteRecipesAsync(action) {
 
   export function* getSingleAsync(action) {
     try{
-        yield put({ type: 'GET_COMMENT', response: action.index }) 
+        yield put({ type: 'GET_COMMENT', response: action.index })
         let token = localStorage.getItem('token')
         const response = yield call(axios.get, `${recipeUrl}/${action.index}?token=${token}`)
-        yield put({ type: 'ADD_SINGLE', response: response.data }) 
+        yield put({ type: 'ADD_SINGLE', response: response.data })
         console.log(response)
     }catch(e){
        console.log(e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchGetSingleRecipe() {
       yield takeEvery('GET_SINGLE', getSingleAsync)
@@ -268,23 +272,84 @@ export function* upvoteRecipesAsync(action) {
 
   export function* getCommentAsync(action) {
     try{
-        console.log('i am runnin at localhost')
+        console.log('i am runnin at localhost yipee')
         let token = localStorage.getItem('token')
         const response = yield call(axios.get, `${recipeUrl}/${action.response}/rev?token=${token}`)
-        yield put({ type: 'ADD_COMMENT', response: response.data }) 
+        yield put({ type: 'ADD_COMMENT', response: response.data })
         console.log(response)
     }catch(e){
-       console.log(e.response)
+        console.log(e.response)
     }
   }
-  
+
   // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
   export function* watchGetComment() {
       yield takeEvery('GET_COMMENT', getCommentAsync)
   }
 
+  export function* getPhoto(action) {
+    try{
+        console.log('i am runnin at localhost to Photo')
+        let token = localStorage.getItem('token')
+        const response = yield call(axios.get, `${galleryUrl}/${action.index}?token=${token}`)
+        const response2 = yield call(axios.get, `${recipeUrl}/fav?token=${token}`)
+        yield put({ type: 'ADD_PHOTO', response: response.data.photo })
+        yield put({ type: 'FAV_SUCCESS', response: response2.data })
+        console.log(response.data.photo)
+    }catch(e){
+       console.log(e.response)
+    }
+  }
+
+  // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+  export function* watchGetPhoto() {
+      yield takeEvery('GET_PHOTO', getPhoto)
+  }
+
+  export function* addComment(action) {
+    try{
+        console.log('i am runnin at localhost to addcomment')
+        let token = localStorage.getItem('token')
+        console.log(token)
+        const response = yield call(axios.post, `${recipeUrl}/${action.postId}/review`, {
+          token: token,
+          content: action.comment,
+        })
+        console.log(response.data)
+    }catch(e){
+       console.log(e.response)
+    }
+  }
+
+  // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+  export function* watchAddComment() {
+      yield takeEvery('ADD_COMMENTS', addComment)
+  }
+
+
+  export function* userProfile(action) {
+    try{
+        console.log('i am runnin at localhost to proflieee')
+        let token = localStorage.getItem('token')
+        console.log(token)
+        const response = yield call(axios.get, `${galleryUrl}?token=${token}`)
+        console.log(response.data)
+        yield put({ type: 'ADD_PROFILE', response: response.data })
+    }catch(e){
+       console.log(e.response)
+    }
+  }
+
+  // Our watcher Saga: spawn a new incrementAsync task on each INCREMENT_ASYNC
+  export function* watchGetProfile() {
+      yield takeEvery('GET_PROFILE', userProfile)
+  }
+
 export default function* rootSaga() {
     yield [
+      watchGetProfile(),
+      watchGetPhoto(),
+      watchAddComment(),
       watchIncrementAsync(),
       watchGetComment(),
       watchGetSingleRecipe(),
