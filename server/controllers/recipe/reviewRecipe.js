@@ -22,7 +22,7 @@ const reviewRecipe = (req, res) => { // ---------------------add review and aler
         });
       }
         Comment.create({
-          recipeId: 1,
+          recipeId: 25,
           content: req.body.content,
           email: decoded.user.username,
           occupation: req.params.id,
