@@ -12,9 +12,11 @@ import upvote from './upvote';
 import downvote from './downvote';
 import addPhoto from './addPhoto';
 import photoCart from './allPhoto';
+import userPhotos from './userPhoto';
 
 const recipesController = {
   addPhoto,
+  userPhotos,
   photoCart,
   createRecipe,
   updateRecipe,

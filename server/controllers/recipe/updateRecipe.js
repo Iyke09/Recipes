@@ -1,68 +1,36 @@
-import { Recipe } from '../../models';
+import { Gallery } from '../../models';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 
-const updateRecipe = (req, res) => { // ---------- send email if user's fav recipe gets updated
+const updateGallery = (req, res) => { // ---------- send email if user's fav Gallery gets updated
   const decoded = jwt.decode(req.body.token || req.query.token || req.headers.token);
-  Recipe.findOne({ where: { id: req.params.id } })
+  Gallery.findOne({ where: { id: req.params.id } })
   .then((recipe) => {
     if (!recipe) {
       return res.status(404).send({
-        message: 'recipe Not Found',
+        message: 'Photo Not Found',
       });
     }
-    if (recipe.userId !== decoded.user.id) {
+    if (recipe.user !== decoded.user.username) {
       return res.status(401).json({
         message: 'Unauthorization error',
       });
     }
     return recipe
       .update({
-        title: req.body.title || recipe.title,
-        description: req.body.description || recipe.description,
-        category: req.body.category || recipe.category,
         image: req.body.image || recipe.image,
-        ingredients: req.body.ingredients || recipe.ingredients,
-        instructions: req.body.instructions || recipe.instructions,
-        userId: decoded.user.id || recipe.userId
+        caption: req.body.caption || recipe.caption,
+        category: req.body.category || recipe.category,
+        likes: req.body.likes || recipe.likes,
+        comments: req.body.comment || recipe.comments,
+        user: decoded.user.username
       })
-      .then((success) => {
-        if (success.favUser.length > 1) {
-          const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-              user: 'iykay33@gmail.com',
-              pass: 'p3nn1s01',
-            },
-          });
-          for (const x of success.favUser) {
-            const mailOptions = {
-              from: 'iykay33@gmail.com',
-              to: x,
-              subject: 'Email example2',
-              text: 'Hello User,your favorite recipe has been updated',
-            };
-            transporter.sendMail(mailOptions, (err, info) => {
-              if (err) {
-                console.log(`hiiiii err ${err}`);
-              } else {
-                console.log(`Message sent: ${info.response}`);
-              }
-            });
-          }
-          res.status(201).send({
-            message: 'recipe updated'
-          });
-        }
-        res.status(201).send({
+      .then((success) => res.status(201).send({
           message: 'recipe updated'
-        });
-      })
-      .catch(error => res.status(500).send({
-        message: error.errors[0].message
-      }));
+      }))
+      .catch(error => res.status(500).send(error));
   })
     .catch(error => res.status(400).send(error));
 };
 
-export default updateRecipe;
+export default updateGallery;
