@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     });
 
-    Favorite.belongsTo(models.Gallery, {
-      foreignKey: 'recipeId',
-      as: 'check',
-    });
   };
 
 

@@ -11,16 +11,6 @@ module.exports = {
     recipeId: {
       type: Sequelize.INTEGER,
     },
-    // cartId: {
-    //   type: Sequelize.INTEGER,
-    //   onDelete: 'CASCADE',
-    //   allowNull: true,
-    //   references: {
-    //     model: 'Categories',
-    //     key: 'id',
-    //     as: 'category',
-    //   },
-    // },
     userId: {
       type: Sequelize.INTEGER,
       onDelete: 'CASCADE',
