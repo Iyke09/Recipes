@@ -12,9 +12,9 @@ const rootUrl = 'https://jsonplaceholder.typicode.com';
 // const recipeUrl = 'http://localhost:8000/api/recipes'
 // const galleryUrl = 'http://localhost:8000/api/gallery'
 
-const userUrl = 'http://reciped.herokuapp.com/api/users'
-const recipeUrl = 'http://reciped.herokuapp.com/api/recipes'
-const galleryUrl = 'http://reciped.herokuapp.com/api/gallery'
+const userUrl = 'https://reciped.herokuapp.com/api/users'
+const recipeUrl = 'https://reciped.herokuapp.com/api/recipes'
+const galleryUrl = 'https://reciped.herokuapp.com/api/gallery'
 
 export function* incrementAsync(action) {
   try{
