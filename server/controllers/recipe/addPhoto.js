@@ -13,7 +13,7 @@ const addPhoto = (req, res) => { // -----------------------------create recipe!
     caption: req.body.caption,
     category: req.body.category,
     likes: req.body.likes,
-    comment: req.body.comment,
+    comments: req.body.comment,
     user: decoded.user.username,
   })
     .then(photos => res.status(201).send({

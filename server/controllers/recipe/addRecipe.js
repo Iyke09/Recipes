@@ -8,7 +8,7 @@ const addRecipe = (req, res) => { // -----------------------------create recipe!
       message: 'you have to be logged in to create recipe',
     });
   }
-  return Recipe.create({
+  Recipe.create({
     title: req.body.title,
     category: req.body.category,
     description: req.body.description,
