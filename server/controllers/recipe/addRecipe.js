@@ -21,9 +21,7 @@ const addRecipe = (req, res) => { // -----------------------------create recipe!
       recipe: recipes,
       message: 'recipe created'
     }))
-    .catch(error => res.status(500).send({
-      message: error.errors[0].message
-    }));
+    .catch(error => res.status(500).send(error.toString()));
 };
 
 export default addRecipe;
