@@ -11,11 +11,7 @@ const signup = React.createClass({
     this.refs.addForm.reset();
   },
   render() {
-    const errorMessage = this.props.error.pop();
-    let errorMessages = '_';
-    if(errorMessage !== undefined){
-       errorMessages = errorMessage.message
-    }
+    const errorMessage = this.props.error
     const recipe = this.props.edit[0]
     return (
       <div className="row">
