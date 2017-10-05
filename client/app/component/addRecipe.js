@@ -11,7 +11,7 @@ const signup = React.createClass({
     this.refs.addForm.reset();
   },
   render() {
-    const errorMessage = this.props.error.pop();
+    const errorMessage = this.props.error
     console.log(errorMessage)
     return (
       <div className="row">
@@ -19,6 +19,7 @@ const signup = React.createClass({
             <div className="card-4">
               <form className="w3-container padding-large padding-16" ref="addForm" onSubmit={this.handleSubmit}>
                 <h3 className="center">Add Photo</h3>
+                <p className="text-red center">{errorMessage}</p>
                 <label className="w3-text-black"><b>Caption:</b></label>
                 <textarea type="text" rows="5" ref="caption"></textarea>
 

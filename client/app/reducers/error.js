@@ -11,16 +11,15 @@ function error(state = [], action) {
         console.log(action)
         console.log( [...state, action.error] )
 
-        return [...state, action.error]
+        return action.error.message
     case 'RECIPE_SUCCESS' :
         console.log('Incrementing succes from the saga!!!');
         console.log(state);
         console.log(action.response)
-        return [...state, action.response] 
+        return action.response.message
     default:
         return state;
     }
   }
-  
+
   export default error;
-  
