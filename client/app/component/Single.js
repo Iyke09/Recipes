@@ -2,6 +2,7 @@ import React from 'react';
 import jwt from 'jwt-decode';
 import Photo from './Photo';
 import Comments from './Comments';
+import { browserHistory } from 'react-router';
 
 const Single = React.createClass({
   handleSubmit(e, val) {
@@ -12,6 +13,9 @@ const Single = React.createClass({
     this.refs.addcomment.reset();
 
     this.props.getSingle(id)
+    location.reload()
+  },
+  componentWillUnmount(){
     location.reload()
   },
   renderComment(comment, i){
