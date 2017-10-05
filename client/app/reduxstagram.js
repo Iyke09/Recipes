@@ -29,7 +29,7 @@ const router = (
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={PhotoGrid}></IndexRoute>
-        <Route path="/recipes/add" component={Add}></Route>
+        <Route path="/photos/add" component={Add}></Route>
         <Route path="/recipes/edit" component={Edit}></Route>
         <Route path="/auth/signup" component={Signup}></Route>
         <Route path="/auth/signin" component={Signin}></Route>

@@ -115,11 +115,10 @@ export function* addRecipesAsync(action) {
         console.log('trying to connect to user db...')
         console.log('heyyyyy ' + action)
         let token = localStorage.getItem('token')
-        const response = yield call(axios.post, `${recipeUrl}?token=${token}`, {
-            title: action.title,
-            img: action.image,
+        const response = yield call(axios.post, `${galleryUrl}?token=${token}`, {
+            image: action.image,
             category: action.category,
-            description: action.description
+            caption: action.caption
         })
         yield put({ type: 'RECIPE_SUCCESS', response: response.data })
     }catch(e){

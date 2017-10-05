@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Profile = React.createClass({
+  componentWillMount(){
+    this.props.getProfile()
+  },
   eventHandler(e, val) {
     $(`#${e}`).hide(1000);
     this.props.deleteRecipe(e);
@@ -9,7 +12,6 @@ const Profile = React.createClass({
   },
   renderPhoto(res, i) {
     return (
-      <div >
         <div className="display-container off" id={res.id}>
             <img className="" src={res.image}/>
             <section className=" display-hover display-bottommiddle grid-sect">
@@ -36,7 +38,7 @@ const Profile = React.createClass({
               </section>
             </div>
         </div>
-      </div>
+
     )
   },
   renderPhoto2(res, i) {
@@ -111,7 +113,9 @@ const Profile = React.createClass({
                 <a href="#" className="bar-item button" onclick="max()" style={{textDecoration: 'none'}}>Greyscale</a>
                 <a href="#" className="bar-item button light-grey">Sepia</a>
                 <a href="#" className="bar-item button" onclick="min()" style={{textDecoration: 'none'}}>Greyscale-min</a>
-
+                <Link to='/photos/add'>
+                <a className="bar-item button" onclick="min()" style={{textDecoration: 'none'}}>Add Photo</a>
+                </Link>
               </div>
             </div>
             <div className="row" id="myGrid" style={{marginBottom: 128}}>

@@ -110,13 +110,12 @@ export function checkUser(email, password) {
     }
 }
 
-export function addRecipe(title, image, category, description)  {
+export function addPhoto( image, category, caption)  {
     return {
         type: 'ADD_RECIPES',
-        title,
         image,
         category,
-        description
+        caption
     }
 }
 export function getRecipes() {
